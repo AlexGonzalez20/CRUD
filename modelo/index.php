@@ -10,13 +10,22 @@
 </head>
 
 <body>
-    <h1 class="text-center p-3">CRUD</h1>
+    <script>
+        function eliminar() {
+            var respuesta = confirm("¿Está seguro de querer elimnar el registro?");
+            return respuesta
+        }
+    </script>
+    <h1 class="text-center p-3">Módulo de Registro de Usuarios</h1>
+    <?php
+    include "../modelo/conexion.php";
+    include "../controlador/eliminar_persona.php";
+    ?>
     <div class="container-fluid row">
         <!-- Cambiado method y corregido el formato de clase -->
         <form class="col-4" method="post">
             <h3 class="text-center text-secondary">Registro de personas</h3>
             <?php
-            include "../modelo/conexion.php";
             include "../controlador/registro_persona.php";
             ?>
             <div class="mb-3">
@@ -68,8 +77,8 @@
                             <td><?= $datos->fecha_nac ?></td>
                             <td><?= $datos->correo ?></td>
                             <td>
-                                <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                <a href="modificar_persona.php?id=<?= $datos->id ?>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a onclick="return eliminar()" href="index.php?id=<?= $datos->id ?>" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php }
